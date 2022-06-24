@@ -1,0 +1,25 @@
+{% if user.is_authenticated %}
+  <a href="{% url 'blog_logout' %}">Cerrar sesión</a>
+  <a href="{% url 'blog_create' %}">Crear entrada nueva</a>
+  <a href="{% url 'blogger_profile' user.id %}">Ver perfil ({{user.username}})</a>
+{% else %}
+  <a href="{% url 'blog_login' %}">Entrar a tu cuenta</a>
+  <a href="{% url 'blogger_signup' %}">Crear cuenta nueva</a>
+{% endif %}
+
+
+
+{% if object_list %}
+    {% for blog in object_list %}
+    <li>
+        
+        <a href="{% url 'blog_detail' blog.id %}">{{blog.titulo}}</a>
+        {% if user.is_authenticated %}
+          <a href="{% url 'blog_delete' blog.id %}">Borrar entrada</a>
+          <a href="{% url 'blog_update' blog.id %}">Actualizar entrada</a>
+        {% endif %}
+    </li>
+    {% endfor %}
+{% else %}
+  <h1> Aún no se han publicado blogs. ¡Sé el primero en publicar!</h1>
+{% endif %}
