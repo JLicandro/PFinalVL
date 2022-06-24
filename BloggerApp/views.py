@@ -17,7 +17,7 @@ class BloggerProfile(DetailView):
     model = User
     template_name = "BloggerApp/blogger_detail.html"
 
-
+#### USER UPDATE #### Falta agregar Imagen
 class BloggerUpdate(LoginRequiredMixin, UpdateView):
 
     model = User

@@ -22,7 +22,7 @@ class BlogDetail(DetailView):
     model = BlogModel
     template_name = "Blogapp/blog_detail.html"
 
-
+### Falta agregar Imágen ###
 class BlogCreate(LoginRequiredMixin, CreateView):
 
     model = BlogModel
@@ -33,7 +33,7 @@ class BlogCreate(LoginRequiredMixin, CreateView):
         form.instance.autor = self.request.user
         return super().form_valid(form)
 
-
+### Actualizar imágen ###
 class BlogUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     model = BlogModel
