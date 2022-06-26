@@ -1,7 +1,11 @@
-<a href="{% url 'blog_list' %}">Volver a Lista</a>
+{% extends "BlogApp/parent.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Crear Cuenta">
-</form>
+</form></div><br><br>
+{% endblock %}

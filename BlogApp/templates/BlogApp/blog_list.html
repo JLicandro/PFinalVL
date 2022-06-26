@@ -1,28 +1,75 @@
-{% if user.is_authenticated %}
-  <a href="{% url 'blog_logout' %}">Cerrar sesión</a>
-  <a href="{% url 'blog_create' %}">Crear entrada nueva</a>
-  <a href="{% url 'blogger_profile' user.id %}">Ver perfil ({{user.username}})</a>
-{% else %}
-  <a href="{% url 'blog_login' %}">Entrar a tu cuenta</a>
-  <a href="{% url 'blogger_signup' %}">Crear cuenta nueva</a>
-{% endif %}
+{% extends "BlogApp/parent.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
 
-{% if object_list %}
-  <ol>
-    {% for blog in object_list %}
-    <li>
-        
-        <a href="{% url 'blog_detail' blog.id %}" style="font-size: 18px;">{{blog.titulo}} <br>({{blog.subtitulo}})</a>
-        {% if user.is_authenticated %}
-          {% if user == blog.autor %}
-            <br>
-            <a href="{% url 'blog_delete' blog.id %}" style="font-size: 10px;">Borrar</a> |
-            <a href="{% url 'blog_update' blog.id %}" style="font-size: 10px;">Actualizar</a>
-          {% endif %}
-        {% endif %}
-    </li>
-    {% endfor %}
-  </ol>
-{% else %}
-  <h1> Aún no se han publicado blogs. ¡Sé el primero en publicar!</h1>
-{% endif %}
+    <!-- Blog Start -->
+    <div class="container-fluid pt-5">
+      <div class="container">
+          <div class="text-center pb-2">
+              <h1 class="mb-4">Listado de entradas</h1>
+              {% if user.is_authenticated %}
+                <a href="{% url 'blog_create' %}">Crear entrada nueva</a>
+
+              {% else %}
+                <a href="{% url 'blog_login' %}">Inicia sesión</a> o
+                <a href="{% url 'blogger_signup' %}">regístrate</a> para crear una entrada nueva.
+              {% endif %}
+              <br><br>
+          </div>
+          <div class="row">
+
+            {% if object_list %}
+               {% for blog in object_list %}             
+                 <div>
+                    <div class="position-relative">
+                        <img class="img-fluid w-100" src="img/blog-1.jpg" alt="">
+                        <div class="position-absolute bg-primary d-flex flex-column align-items-center justify-content-center rounded-circle"
+                            style="width: 60px; height: 60px; bottom: -30px; right: 30px;">
+                            <h4 class="font-weight-bold mb-n1">{{blog.creacion.day}}</h4>
+                            <small class="text-white text-uppercase">{{blog.creacion|date:"F"}}</small>
+                        </div>
+                    </div>
+                    <div class="bg-secondary" style="padding: 30px;">
+                        <div class="d-flex mb-3">
+                          {% if blog.imagen %}  
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-square" style="width: 40px; height: 40px;" src="{{blog.imagen.url}}" alt="">
+                          {% else %}
+                          <div class="d-flex align-items-center">
+                            <img class="rounded-square" style="width: 40px; height: 40px;" src="{% static 'noimage.jpg' %}" alt="">                            
+                          {% endif %}
+                               <span class="text-muted ml-2">Por: {{blog.autor}}</span>
+
+                            </div>
+                            <div class="d-flex align-items-center ml-4">
+                              {% if user.is_authenticated %}
+                              {% if user == blog.autor %}
+                                <br>
+                                <a href="{% url 'blog_delete' blog.id %}" style="font-size: 10px;">Borrar</a> 
+                                <a href="{% url 'blog_update' blog.id %}" style="font-size: 10px;">Actualizar</a>
+                              {% endif %}
+                            {% endif %}
+                            </div>
+                        </div>
+                        <h4 class="font-weight-bold mb-3">{{blog.titulo}}</h4>
+                        <p>{{blog.subtitulo}}</p>
+                        <a class="border-bottom border-primary text-uppercase text-decoration-none" href="{% url 'blog_detail' blog.id %}">Leer entrada <i class="fa fa-angle-right"></i></a>
+                    </div>
+                </div>
+                        
+              {% endfor %}
+            {% else %}
+              </div><div></div><h1 style="text-align: center;">Aún no se han publicado blogs. <br> ¡Sé el primero!</h1>
+             
+              
+            {% endif %}
+          </div>
+      </div>
+  </div>
+  <!-- Blog End -->
+
+
+
+
+{% endblock %}
+

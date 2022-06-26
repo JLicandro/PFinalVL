@@ -1,0 +1,34 @@
+{% extends "BlogApp/parent.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
+<div class="container">
+    <div class="text-center pb-2">
+        <h1 class="mb-4">¡Bienvenido!</h1>
+        
+        <h3>El sitio cuenta con {{numblogs}} 
+            {% if numblogs == 1 %}
+            entrada
+            {% else %}
+            entradas
+            {% endif %}
+            y {{numuser}}
+            {% if numuser == 1 %}
+            usuario
+            {% else %}
+            usuarios
+            {% endif %}
+            </h3>
+        
+        {% if user.is_authenticated %}
+          <a href="{% url 'blog_create' %}">¡Crea una entrada nueva para aumentar el número!</a>
+
+        {% else %}
+        <br><h5><a href="{% url 'blog_login' %}">¡Inicia sesión para aumentar el número!</a></h5>
+          <br>
+          <a href="{% url 'blogger_signup' %}">¿No tienes cuenta? ¡Regístrate! </a>
+        {% endif %}
+        <br><br>
+    </div>
+    <div class="row">
+{% endblock %}

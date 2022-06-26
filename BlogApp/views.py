@@ -8,7 +8,8 @@ from django.contrib.auth.views import LoginView, LogoutView
 from BlogApp.models import BlogModel
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.forms import UserCreationForm
-
+from django.views.generic import TemplateView
+from django.contrib.auth.models import User
 
 
 class BlogList(ListView):
@@ -22,7 +23,7 @@ class BlogDetail(DetailView):
     model = BlogModel
     template_name = "Blogapp/blog_detail.html"
 
-### Falta agregar Imágen ###
+
 class BlogCreate(LoginRequiredMixin, CreateView):
 
     model = BlogModel
@@ -33,7 +34,6 @@ class BlogCreate(LoginRequiredMixin, CreateView):
         form.instance.autor = self.request.user
         return super().form_valid(form)
 
-### Actualizar imágen ###
 class BlogUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     model = BlogModel
@@ -64,3 +64,20 @@ class BlogLogin(LoginView):
 class BlogLogout(LogoutView):
     template_name = 'Blogapp/blog_logout.html'
 
+def photo(request):
+    imagen = BlogModel.objects.imagen()
+    return render("blog_list.html", {"imagen": imagen})
+
+def index(request):
+    num_blogs = BlogModel.objects.all().count()
+    num_user = User.objects.all().count()
+
+    context = {'numblogs':num_blogs, 'numuser':num_user}
+    return render(request, 'BlogApp/index.html', context=context)
+
+def autores(request):
+    num_blogs = BlogModel.objects.all().count()
+    num_user = User.objects.all().count()
+
+    context = {'numblogs':num_blogs, 'numuser':num_user}
+    return render(request, 'BlogApp/autores.html', context=context)

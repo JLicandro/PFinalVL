@@ -1,5 +1,17 @@
+{% extends "BlogApp/parent.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
+<div align="center" style="font-size:35px">
 <form method="post">{% csrf_token %}
-    <p>¿Está Seguro que quiere borrar "{{ object }}"?</p>
+    <p>¿Está seguro que quiere eliminar la siguiente entrada?</p>
+    <p style = "font-size: 25px">"{{ object }}"</p>
     {{ form }}
-    <input type="submit" value="Confirmar">
+</div>
+<div align ="center">
+<input type="submit" value="Confirmar">
 </form>
+</div>
+<br>
+
+{% endblock %}

@@ -1,7 +1,15 @@
-<a href="{% url 'blog_list' %}">Volver a Lista</a>
+{% extends "BlogApp/parent.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
+
+<div align="center">
+<a href="{% url 'blog_list' %}">Cancelar</a><br><br>
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Guardar">
 </form>
+<br>
+</div>
+{% endblock %}

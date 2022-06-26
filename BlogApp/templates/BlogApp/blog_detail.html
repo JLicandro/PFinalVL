@@ -1,8 +1,22 @@
+{% extends "BlogApp/parent.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
 <a href="{% url 'blog_list' %}">Volver a Lista</a>
 <div>
-    <h1>{{object.titulo}}</h1>
-    <h2>{{object.subtitulo}}</h2>
-    <p> {{object.cuerpo}} </p>
-    <h3>{{object.fecha}}</h3>
-    <h3>{{object.autor}}</h3>
+    <span style="font-size: 30;"><i>{{object.titulo}}</i></span>
+    <br>
+    <span style="font-size:24;">{{object.subtitulo}}</span>
+    <hr>
+{% if user.is_authenticated %}
+    {% if user == object.autor %}
+      <a href="{% url 'blog_delete' object.id %}" style="font-size: 10px;">Borrar</a> |
+      <a href="{% url 'blog_update' object.id %}" style="font-size: 10px;">Actualizar</a>
+    {% endif %}
+{% endif %}
+<p>Publicado por {{object.autor}} en ({{object.creacion}})</p>    
+<p style="font-size:20;"> {{object.cuerpo}} </p>
+
+{% endblock %}
+
+
 </div>

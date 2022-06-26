@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from BlogApp import views
 
 urlpatterns = [
+    path('', views.index),
     path('blog/', include('BlogApp.urls')),
+    path('autores/', views.autores),
     path('blogger/', include('BloggerApp.urls')),
     path('admin/', admin.site.urls),
 ]

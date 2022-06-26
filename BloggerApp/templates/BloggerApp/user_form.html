@@ -1,11 +1,18 @@
-<a href="{% url 'blogger_profile' user.id %}">Volver a Profile</a>
+{% extends "BlogApp/parent.html" %}
+{% load static %}
+{% block contenidoQueCambia %}
 
+<a href="{% url 'blogger_profile' user.id %}">Volver a Profile</a>
+<br><br>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    Si desea cambiar su imagen, contáctese con un administrador.
+<br>
     <input type="submit" value="Guardar">
 </form>
 
 <img height="128" src="{{ object.avatar_set.first.image.url }}" />
 <br>
-Si desea cambiar su imagen, contáctese con un administrador.
+<br>
+{% endblock %}
