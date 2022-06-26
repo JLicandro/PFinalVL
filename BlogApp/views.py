@@ -27,7 +27,7 @@ class BlogCreate(LoginRequiredMixin, CreateView):
 
     model = BlogModel
     success_url = reverse_lazy("blog_list")
-    fields = ["titulo", "sub_titulo", "imagen", "cuerpo"]
+    fields = ["titulo", "subtitulo", "imagen", "cuerpo"]
 
     def form_valid(self, form):
         form.instance.autor = self.request.user
@@ -38,7 +38,7 @@ class BlogUpdate(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     model = BlogModel
     success_url = reverse_lazy("blog_list")
-    fields = ["titulo", "sub_titulo", "imagen", "cuerpo"]
+    fields = ["titulo", "subtitulo", "imagen", "cuerpo"]
 
     def test_func(self):
         exist = BlogModel.objects.filter(autor=self.request.user.id, id=self.kwargs['pk'])
