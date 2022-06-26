@@ -9,8 +9,8 @@
     <h3>Correo electronico: </h3> <h5>{{object.email}}</h5> 
     <h3>Nombre de Usuario: </h3> <h5>{{object.username}}</h5>
 
-{% if blogger.image %}
-<br><br><img height="128" src="{{blogger.avatar.url}}" />
+{% if object.avatar_set.first.image %}
+<br><br><img height="128" src="{{ object.avatar_set.first.image.url }}" />
 {% else %}
 <br>Contacta a un administrador para que agregue una imagen a tu perfil.
 {% endif %}

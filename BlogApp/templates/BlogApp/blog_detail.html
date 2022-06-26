@@ -1,13 +1,17 @@
 {% extends "BlogApp/parent.html" %}
 {% load static %}
 {% block contenidoQueCambia %}
-<a href="{% url 'blog_list' %}">Volver a Lista</a>
+
 <div>
   <div align="center">
-    <span style="font-size: 30;"><i>{{object.titulo}}</i></span>
+    <a href="{% url 'blog_list' %}">Volver a Lista</a>
+    <h2 style="font-size: 30;"><i>{{object.titulo}}</i></h2>
     <br>
-    <span style="font-size:24;">{{object.subtitulo}}</span>
+    <h4 style="font-size:24;">{{object.subtitulo}}</h4>
     <hr>
+    Publicado por {{object.autor}} en ({{object.creacion}})
+    <br><br>
+    <p style="font-size:20;"> {{object.cuerpo}} </p>
     <img src = "{{ object.imagen.url }}" height="500">
   </div>
 {% if user.is_authenticated %}
@@ -18,8 +22,8 @@
     </div>
     {% endif %}
 {% endif %}
-<p>Publicado por {{object.autor}} en ({{object.creacion}})</p>    
-<p style="font-size:20;"> {{object.cuerpo}} </p>
+    
+
 
 {% endblock %}
 
