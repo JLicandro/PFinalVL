@@ -14,4 +14,4 @@ class BlogModel(models.Model):
     creacion = models.DateField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.titulo} ({self.subtitulo} - {self.autor} en {self.creacion}'
+        return f'{self.titulo} ({self.subtitulo}) - {self.autor} en {self.creacion}'

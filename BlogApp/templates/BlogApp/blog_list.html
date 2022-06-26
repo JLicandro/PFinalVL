@@ -14,9 +14,11 @@
         
         <a href="{% url 'blog_detail' blog.id %}" style="font-size: 18px;">{{blog.titulo}} <br>({{blog.subtitulo}})</a>
         {% if user.is_authenticated %}
-          <br>
-          <a href="{% url 'blog_delete' blog.id %}" style="font-size: 10px;">Borrar</a> |
-          <a href="{% url 'blog_update' blog.id %}" style="font-size: 10px;">Actualizar</a>
+          {% if user == blog.autor %}
+            <br>
+            <a href="{% url 'blog_delete' blog.id %}" style="font-size: 10px;">Borrar</a> |
+            <a href="{% url 'blog_update' blog.id %}" style="font-size: 10px;">Actualizar</a>
+          {% endif %}
         {% endif %}
     </li>
     {% endfor %}
