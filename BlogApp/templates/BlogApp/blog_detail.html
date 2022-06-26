@@ -3,14 +3,19 @@
 {% block contenidoQueCambia %}
 <a href="{% url 'blog_list' %}">Volver a Lista</a>
 <div>
+  <div align="center">
     <span style="font-size: 30;"><i>{{object.titulo}}</i></span>
     <br>
     <span style="font-size:24;">{{object.subtitulo}}</span>
     <hr>
+    <img src = "{{ object.imagen.url }}" height="500">
+  </div>
 {% if user.is_authenticated %}
     {% if user == object.autor %}
+    <div align="center">
       <a href="{% url 'blog_delete' object.id %}" style="font-size: 10px;">Borrar</a> |
       <a href="{% url 'blog_update' object.id %}" style="font-size: 10px;">Actualizar</a>
+    </div>
     {% endif %}
 {% endif %}
 <p>Publicado por {{object.autor}} en ({{object.creacion}})</p>    
